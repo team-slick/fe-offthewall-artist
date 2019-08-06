@@ -15,11 +15,11 @@
 }
 
 .root {
-  height: '100vh',
+  height: 100vh;
 }
 
 .image {
-  background-image: url(https://source.unsplash.com/random);
+  background-image: url("./images/offthewall.png");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -32,18 +32,37 @@
   align-items: 'center';
 }
 
-.avatar {
-  margin: 10px;
-  background-color: var(--muted-yellow);
+/* .form {
+  font-family: 'Montserrat', sans-serif;
+  width: 100%;
+} */
+
+/* .submit {
+  width: 100%;
+  height: 8vh;
+  background-color: var(--blue-dark);
+  color: white;
+  margin-top: 2vh;
+  font-size: 3vh;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  border-radius: 6px;
+} */
+
+.links {
+  display: flex;
+  text-decoration: none;
+  justify-content: space-evenly;
+  padding: 2vh;
+  font-size: 2vh;
 }
 
-.form {
-  width: '100%';
-  margin-top: 5px;
+.links a {
+  color: var(--blue-dark);
 }
 
-.submit {
-  margin: 10px;
+.links a:hover {
+  cursor: pointer;
 }
 
 
