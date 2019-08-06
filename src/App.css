@@ -8,6 +8,12 @@
 }
 
 .App {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 5fr;
+  grid-template-areas:
+  'header header'
+  'main main';
   text-align: center;
   font-family: 'Montserrat', sans-serif;
 }
