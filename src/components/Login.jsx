@@ -20,14 +20,14 @@ class Login extends Component {
           <div className="paper">
             <form className="form" onSubmit={this.handleSubmit}>
               <div className='group'>
-                <input type="text" onChange={this.handleChange} value={this.state.username}/>
+                <input type="text" onChange={this.handleChange} value={this.state.username} />
                 <label>Username</label>
                 <span className="highlight" />
                 <span className="bar" />
               </div>
 
               <div className='group'>
-                <input type="password" onChange={this.handleChange} value={this.state.password}/>
+                <input type="password" onChange={this.handleChange} value={this.state.password} />
                 <label>Password</label>
                 <span className="highlight" />
                 <span className="bar" />
@@ -52,14 +52,15 @@ class Login extends Component {
 
   handleChange = event => {
     const { value } = event.target;
-    this.setState({username: value})
+    this.setState({ username: value })
   };
 
   handleSubmit = event => {
+    console.log('submitting')
     event.preventDefault();
-    const {username} = this.state;
+    const { username } = this.state;
     // api request needed here?
-    this.setState({username: '', password: ''})
+    this.setState({ username: '', password: '' })
   }
 }
 
