@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import { storage } from "../firebase";
-import "../App.css";
-import "../styles/Login.css";
+import "../styles/Upload.css";
 import { Query } from '@apollo/react-components';
 import { gql } from 'apollo-boost';
 
@@ -11,7 +10,9 @@ class Upload extends Component {
   state = {
     image: null,
     urlString: "",
-    wall_id: null
+    wall_id: null,
+    wall_address: '',
+    isConfirmed: false
   };
 
   render() {
@@ -21,11 +22,12 @@ class Upload extends Component {
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
           <div className="paper">
             <p>
-              Welcome (enter username here), simply choose a wall from the list
+              Welcome (insert username here), simply choose a wall from the list
               below and upload you art.
             </p>
             <form className="form">
-              <select onChange={this.handleSelectChange}>
+            <p className='select-label'>Choose a wall:</p>
+              <select className='drop-down' onChange={this.handleSelectChange}>
                 <Query query={gql`
                 {
                   fetchAllWalls {
@@ -44,7 +46,8 @@ class Upload extends Component {
                 }}
                 </Query>
               </select>
-              <input type="file" onChange={this.handleChange} />
+              <p className='upload-label'>Upload your artwork:</p>
+              <input type="file" onChange={this.handleChange} className='upload'/>
               <button
                 className="submit"
                 onClick={this.handleUpload}
@@ -55,6 +58,7 @@ class Upload extends Component {
                 </div>
               </button>
             </form>
+              {this.state.isConfirmed && <p>Thank you! <br/>Your ARt has been uploaded the wall!</p>}
           </div>
         </Grid>
       </Grid>
@@ -93,7 +97,7 @@ class Upload extends Component {
           .child(image.name)
           .getDownloadURL()
           .then(url => {
-            this.setState({urlString: url})
+            this.setState({urlString: url, isConfirmed: true})
           })
       }
     );
