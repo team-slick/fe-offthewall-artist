@@ -58,7 +58,7 @@ class Upload extends Component {
                 </div>
               </button>
             </form>
-              {this.state.isConfirmed && <p>Thank you! <br/>Your ARt has been uploaded the wall!</p>}
+              {this.state.isConfirmed && <p>Thank you. <br/>Your ARt has been uploaded the wall!</p>}
           </div>
         </Grid>
       </Grid>
