@@ -5,6 +5,12 @@ import Grid from "@material-ui/core/Grid";
 import "../App.css";
 import "../styles/Login.css"
 import { thisExpression } from "@babel/types";
+import { gql } from "apollo-boost";
+import { useMutation } from "@apollo/react-hooks"
+
+
+const AUTH_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJib2JiaXJhZSIsImlhdCI6MTU2NTE4NTE3OCwiZXhwIjoxNTY3Nzc3MTc4fQ.4eUZhr64Om072dYartWGpcnoai9UZonskHajuH6rfzU"
+
 
 class Login extends Component {
   state = {
@@ -35,7 +41,7 @@ class Login extends Component {
 
               <button type="submit" className="submit">
                 SIGN IN
-                <div className="ripples">
+                  <div className="ripples">
                   <span className="circle"></span>
                 </div>
               </button>
@@ -50,9 +56,18 @@ class Login extends Component {
     );
   }
 
+  saveUserData = token => {
+    localStorage.setItem(AUTH_TOKEN, token)
+  }
+
   handleChange = event => {
     const { value } = event.target;
-    this.setState({ username: value })
+    if (event.target.type === 'text') {
+      this.setState({ username: value })
+    } else {
+      this.setState({ password: value })
+    }
+
   };
 
   handleSubmit = event => {
@@ -65,3 +80,19 @@ class Login extends Component {
 }
 
 export default Login;
+
+//     const LOG_IN = gql`
+//   mutation Login($artist_username: String!, $artist_password: String!) {
+//     login(artist_username: $artist_username               artist_password: $artist_password) {
+//       token
+//       user {
+//         artist_id
+//       }
+//     }
+//   }
+// `
+
+
+//     let input;
+//     const [login, { data }] = useMutation(LOG_IN);
+//     console.log(data)

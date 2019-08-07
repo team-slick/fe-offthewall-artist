@@ -10,27 +10,6 @@ import { gql } from "apollo-boost";
 import { ApolloProvider } from '@apollo/react-hooks';
 import { useQuery, useMutation } from "@apollo/react-hooks"
 
-const LOG_IN = gql`
-  mutation Login($artist_username: String!, $artist_password: String!) {
-    login(artist_username: $artist_username               artist_password: $artist_password) {
-      token
-      user {
-        artist_id
-      }
-    }
-  }
-`
-
-function UserLogin() {
-  let input;
-  const [login, { data }] = useMutation(LOG_IN);
-  console.log(data)
-  return (
-    <div>
-
-    </div>
-  )
-}
 
 
 const client = new ApolloClient({
