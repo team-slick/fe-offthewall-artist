@@ -10,7 +10,8 @@ import { gql } from 'apollo-boost';
 class Upload extends Component {
   state = {
     image: null,
-    urlString: ""
+    urlString: "",
+    wall_id: null
   };
 
   render() {
@@ -24,7 +25,7 @@ class Upload extends Component {
               below and upload you art.
             </p>
             <form className="form">
-              <select>
+              <select onChange={this.handleSelectChange}>
                 <Query query={gql`
                 {
                   fetchAllWalls {
@@ -38,7 +39,7 @@ class Upload extends Component {
                   if (loading) return <option>Loading...</option>
                   if (error) return <option>Error :(</option>
                   return data.fetchAllWalls.map(wall => (
-                    <option value={wall.street_address} key={wall.wall_id}>Address: {wall.street_address}  Dimensions: {wall.canvas_width} x {wall.canvas_height}</option>
+                    <option value={wall.wall_id} key={wall.wall_id}>Address: {wall.street_address}  Dimensions: {wall.canvas_width} x {wall.canvas_height}</option>
                   ))
                 }}
                 </Query>
@@ -60,15 +61,17 @@ class Upload extends Component {
     );
   }
 
-  componentDidMount = () => {
-  }
-
   handleChange = event => {
     if (event.target.files[0]) {
       const image = event.target.files[0];
       this.setState(() => ({ image }));
     }
   };
+
+  handleSelectChange = event => {
+    const { value } = event.target
+    this.setState({wall_id: value})
+  }
 
   handleUpload = (event) => {
     event.preventDefault()
