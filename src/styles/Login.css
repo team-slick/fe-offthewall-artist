@@ -187,3 +187,19 @@ input:focus ~ .highlight {
     opacity: 0;
   }
 }
+
+.links {
+    display: flex;
+    text-decoration: none;
+    justify-content: space-evenly;
+    padding: 2vh;
+    font-size: 2vh;
+  }
+  
+  .links a {
+    color: var(--blue-dark);
+  }
+  
+  .links a:hover {
+    cursor: pointer;
+  }
