@@ -6,9 +6,7 @@ import RegForm from './components/RegForm';
 import Upload from './components/Upload';
 import './App.css';
 import ApolloClient from "apollo-boost";
-import { gql } from "apollo-boost";
 import { ApolloProvider } from '@apollo/react-hooks';
-import { useQuery, useMutation } from "@apollo/react-hooks"
 
 
 

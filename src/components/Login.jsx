@@ -20,8 +20,8 @@ class Login extends Component {
 
   render() {
     const LOGIN = gql`
-  mutation Login($artist_username: String!, $artist_password: String!) {
-    login(artist_username: $artist_username               artist_password: $artist_password) {
+  mutation ($artist_username: String!, $artist_password: String!) {
+    login(artist_username: $artist_username, artist_password: $artist_password) {
       token
       user {
         artist_id
@@ -39,7 +39,11 @@ class Login extends Component {
               <Grid item xs={false} sm={4} md={7} className="image" />
               <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
                 <div className="paper">
-                  <form className="form" onSubmit={this.handleSubmit}>
+                  <form className="form" onSubmit={(event) => {
+                    event.preventDefault();
+                    login({ variables: { username: username, password: password } })
+                    console.log(username, password)
+                  }}>
                     <div className='group'>
                       <input type="text" onChange={this.handleChange} value={this.state.username} />
                       <label>Username</label>
@@ -89,13 +93,13 @@ class Login extends Component {
 
 
 
-  handleSubmit = event => {
-    console.log('submitting')
-    event.preventDefault();
-    const { username } = this.state;
-    // api request needed here?
-    this.setState({ username: '', password: '' })
-  }
+  // handleSubmit = event => {
+  //   console.log('submitting')
+  //   event.preventDefault();
+  //   const { username } = this.state;
+  //   // api request needed here?
+  //   this.setState({ username: '', password: '' })
+  // }
 }
 
 export default Login;
