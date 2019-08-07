@@ -16,21 +16,6 @@ const client = new ApolloClient({
   uri: 'https://offthewall-teamslick.herokuapp.com'
 })
 
-function FetchAllWalls() {
-  const { loading, error, data } = useQuery(gql`
-  {
-    fetchAllWalls{
-      wall_id
-      street_address
-    }
-  }
-  `)
-  if (loading) return <p>Loading...</p>
-  if (error) return <p>Error :(</p>
-  console.log(data.fetchAllWalls[0])
-  return data.fetchAllWalls[0].wall_id;
-}
-
 
 class App extends Component {
   state = {}
@@ -39,9 +24,6 @@ class App extends Component {
       <div className="App" >
         {/* <Header /> */}
         <ApolloProvider client={client} >
-          <div>
-            <FetchAllWalls />
-          </div>
           <Router>
             <Login path='/login' />
             <RegForm path='/register' />
