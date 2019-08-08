@@ -18,6 +18,7 @@ const LOGIN = gql`
       token
       user {
         artist_id
+        artist_username
       }
     }
   }
@@ -39,7 +40,7 @@ class Login extends Component {
             <Mutation
               mutation={LOGIN}
               onCompleted={({ login }) => {
-                this.saveUserData(login.user.artist_id, login.token);
+                this.saveUserData(login.user.artist_id, login.user.artist_username, login.token);
               }}
             >
               {(login, { loading, error, data }) => {
@@ -101,9 +102,10 @@ class Login extends Component {
     );
   }
 
-  saveUserData = (artist_id, token) => {
+  saveUserData = (artist_id, artist_username, token) => {
     localStorage.setItem("ARTIST_ID", artist_id);
     localStorage.setItem("AUTH_TOKEN", token);
+    localStorage.setItem("USERNAME", artist_username)
     navigate("/upload");
   };
 

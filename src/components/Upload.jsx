@@ -16,13 +16,14 @@ class Upload extends Component {
   };
 
   render() {
+    const { ARTIST_ID, USERNAME } = localStorage
     return (
       <Grid container component="main" className="root">
         <Grid item xs={false} sm={4} md={7} className="image" />
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
           <div className="paper">
             <p>
-              Welcome (insert username here), simply choose a wall from the list
+              Welcome <b>{USERNAME}</b>, simply choose a wall from the list
               below and upload you art.
             </p>
             <form className="form">
