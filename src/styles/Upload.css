@@ -66,6 +66,16 @@ label {
 	transition: all 0.2s ease;
 }
 
+/* active */
+
+input:focus ~ label, input.used ~ label {
+	top: -20px;
+  transform: scale(.75); left: -2px;
+	/* font-size: 14px; */
+	color: #999;
+}
+
+
 /* Button */
 
 .submit {

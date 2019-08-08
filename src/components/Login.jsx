@@ -27,7 +27,7 @@ const LOGIN = gql`
 class Login extends Component {
   state = {
     artist_username: "",
-    artist_password: ""
+    artist_password: "",
   };
 
   render() {
