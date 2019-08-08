@@ -61,6 +61,7 @@ class Login extends Component {
                   >
                     <div className="group">
                       <input
+                        className='username'
                         type="text"
                         onChange={this.handleChange}
                         value={this.state.username}
@@ -71,6 +72,7 @@ class Login extends Component {
                     </div>
                     <div className="group">
                       <input
+                        className='password'
                         type="password"
                         onChange={this.handleChange}
                         value={this.state.password}

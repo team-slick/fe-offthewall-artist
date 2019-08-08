@@ -1,117 +1,95 @@
 * { box-sizing:border-box; }
-
-form {
+.form {
     padding: 40px 10px 10px 10px;
     margin: 0;
-	background: #fafafa;
-	border: 1px solid #ebebeb;
-	box-shadow: rgba(0,0,0,0.14902) 0px 1px 1px 0px,rgba(0,0,0,0.09804) 0px 1px 2px 0px;
+    background: #fafafa;
+    border: 1px solid #ebebeb;
+    box-shadow: rgba(0,0,0,0.14902) 0px 1px 1px 0px,rgba(0,0,0,0.09804) 0px 1px 2px 0px;
 }
-
 .group { 
-	position: relative; 
-	margin-bottom: 45px; 
+    position: relative; 
+    margin-bottom: 45px; 
 }
-
 input {
-	font-size: 18px;
-	padding: 10px 10px 10px 5px;
-	-webkit-appearance: none;
-	display: block;
-	background: #fafafa;
-	color: var(--blue-pop);
+    font-size: 18px;
+    padding: 10px 10px 10px 5px;
+    -webkit-appearance: none;
+    display: block;
+    background: #fafafa;
+    color: var(--blue-pop);
     width: 100%;
     margin: 0;
-	border: none;
-	border-radius: 0;
-	border-bottom: 1px solid #757575;
+    border: none;
+    border-radius: 0;
+    border-bottom: 1px solid #757575;
+}
+
+.username {
+  border-bottom: 1px solid #757575;
+}
+
+.password {
+  border-bottom: 1px solid #757575;
 }
 
 input:focus { outline: none; }
-
-
 /* Label */
-
 label {
-	color: #999; 
-	font-size: 18px;
-	font-weight: normal;
-	position: absolute;
-	pointer-events: none;
-	left: 5px;
-	top: 10px;
-	transition: all 0.2s ease;
+    color: #999; 
+    font-size: 18px;
+    font-weight: normal;
+    position: absolute;
+    pointer-events: none;
+    left: 5px;
+    top: 10px;
+    transition: all 0.2s ease;
 }
-
-
 /* active */
-
 input:focus ~ label, input.used ~ label {
-	top: -20px;
+    top: -20px;
   transform: scale(.75); left: -2px;
-	/* font-size: 14px; */
-	color: var(--blue-dark);
+    /* font-size: 14px; */
+    color: var(--blue-dark);
 }
-
-
 /* Underline */
-
 .bar {
-	position: relative;
-	display: block;
-	width: 100%;
+    position: relative;
+    display: block;
+    width: 100%;
 }
-
 .bar:before, .bar:after {
-	content: '';
-	height: 2px; 
-	width: 0;
-	bottom: 1px; 
-	position: absolute;
-	background: var(--blue-dark); 
-	transition: all 0.2s ease;
+    content: '';
+    height: 2px; 
+    width: 0;
+    bottom: 1px; 
+    position: absolute;
+    background: var(--blue-dark); 
+    transition: all 0.2s ease;
 }
-
 .bar:before { left: 50%; }
-
 .bar:after { right: 50%; }
-
-
 /* active */
-
 input:focus ~ .bar:before, input:focus ~ .bar:after { width: 50%; }
-
-
 /* Highlight */
-
 .highlight {
-	position: absolute;
-	height: 60%; 
-	width: 100px; 
-	top: 25%; 
-	left: 0;
-	pointer-events: none;
-	opacity: 0.5;
+    position: absolute;
+    height: 60%; 
+    width: 100px; 
+    top: 25%; 
+    left: 0;
+    pointer-events: none;
+    opacity: 0.5;
 }
-
-
 /* active */
-
 input:focus ~ .highlight {
-	animation: inputHighlighter 0.3s ease;
+    animation: inputHighlighter 0.3s ease;
 }
-
-
 /* Animations */
-
 @keyframes inputHighlighter {
-	from { background: #4a89dc; }
-	to 	{ width: 0; background: transparent; }
+    from { background: #4a89dc; }
+    to  { width: 0; background: transparent; }
 }
-
-
 /* Button */
-
 .submit {
   position: relative;
   display: inline-block;
@@ -132,20 +110,13 @@ input:focus ~ .highlight {
   transition: all 0.15s ease;
 }
 .submit:focus { outline: 0; }
-
-
 /* Button modifiers */
-
 .submit {
   background: var(--blue-dark);
   text-shadow: 1px 1px 0 rgba(39, 110, 204, .5);
 }
-
 .submit:hover { background: var(--pink-pop); color: var(--blue-dark) }
-
-
 /* Ripples container */
-
 .ripples {
   position: absolute;
   top: 0;
@@ -153,10 +124,7 @@ input:focus ~ .highlight {
   overflow: hidden;
   background: transparent;
 }
-
-
 /* Ripples circle */
-
 .circle {
   position: absolute;
   top: 50%;
@@ -168,26 +136,19 @@ input:focus ~ .highlight {
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.25);
 }
-
 .ripples.is-active .circle {
   animation: ripples .4s ease-in;
 }
-
-
 /* Ripples animation */
-
 @keyframes ripples {
   0% { opacity: 0; }
-
   25% { opacity: 1; }
-
   100% {
     width: 200%;
     padding-bottom: 200%;
     opacity: 0;
   }
 }
-
 .links {
     display: flex;
     text-decoration: none;
