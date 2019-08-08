@@ -1,0 +1,145 @@
+* { box-sizing:border-box; }
+
+form {
+    padding: 10px 10px 10px 10px;
+    margin: 0;
+	background: #fafafa;
+	border: 1px solid #ebebeb;
+	box-shadow: rgba(0,0,0,0.14902) 0px 1px 1px 0px,rgba(0,0,0,0.09804) 0px 1px 2px 0px;
+}
+
+.select-label {
+    font-size: 18px;
+    text-align: left;
+    font-weight: bold;
+}
+
+.upload-label {
+    font-size: 18px;
+    text-align: left;
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.group { 
+	position: relative; 
+	margin-bottom: 45px; 
+}
+
+.drop-down {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    height: 40px;
+    width: 98%
+}
+
+input {
+    font-family: 'Montserrat', sans-serif;
+	font-size: 18px;
+	padding: 10px 10px 10px 5px;
+	-webkit-appearance: none;
+	display: block;
+	background: #fafafa;
+	color: #999; 
+    width: 100%;
+    margin: 0;
+	border: none;
+}
+
+input:focus { outline: none; }
+
+.upload {
+  font-family: 'Montserrat', sans-serif;
+}
+
+
+/* Label */
+
+label {
+	color: #999; 
+	font-size: 18px;
+	font-weight: normal;
+	position: absolute;
+	pointer-events: none;
+	left: 5px;
+	top: 10px;
+	transition: all 0.2s ease;
+}
+
+/* Button */
+
+.submit {
+  position: relative;
+  display: inline-block;
+  padding: 12px 24px;
+  margin: .3em 0 1em 0;
+  width: 100%;
+  vertical-align: middle;
+  color: #fff;
+  font-size: 16px;
+  line-height: 20px;
+  -webkit-font-smoothing: antialiased;
+  text-align: center;
+  letter-spacing: 1px;
+  background: transparent;
+  border: 0;
+  border-bottom: 2px solid var(--blue-dark);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.submit:focus { outline: 0; }
+
+
+/* Button modifiers */
+
+.submit {
+  background: var(--blue-dark);
+  text-shadow: 1px 1px 0 rgba(39, 110, 204, .5);
+}
+
+.submit:hover { background: var(--pink-pop); color: var(--blue-dark) }
+
+
+/* Ripples container */
+
+.ripples {
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  background: transparent;
+}
+
+
+/* Ripples circle */
+
+.circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.ripples.is-active .circle {
+  animation: ripples .4s ease-in;
+}
+
+
+/* Ripples animation */
+
+@keyframes ripples {
+  0% { opacity: 0; }
+
+  25% { opacity: 1; }
+
+  100% {
+    width: 200%;
+    padding-bottom: 200%;
+    opacity: 0;
+  }
+}
