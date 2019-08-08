@@ -1,45 +1,81 @@
 import React, { Component } from "react";
-import Link from "@material-ui/core/Link";
-import Paper from "@material-ui/core/Paper";
-import Grid from "@material-ui/core/Grid";
+// import Link from "@material-ui/core/Link";
+// import Paper from "@material-ui/core/Paper";
+// import Grid from "@material-ui/core/Grid";
 import "../App.css";
 import "../styles/Login.css";
 // import { thisExpression } from "@babel/types";
 import { gql } from "apollo-boost";
-import { Mutation } from "@apollo/react-components";
+import { Query } from "@apollo/react-components";
 
 //hard-coded for now
 const AUTH_TOKEN =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJib2JiaXJhZSIsImlhdCI6MTU2NTE4NTE3OCwiZXhwIjoxNTY3Nzc3MTc4fQ.4eUZhr64Om072dYartWGpcnoai9UZonskHajuH6rfzU";
 
+const FETCH_ARTIST = gql`
+  query($artist_id: ID!) {
+    fetchArtistById(artist_id: $artist_id) {
+      artist_username
+    }
+  }
+`;
+
 class Login extends Component {
   state = {
-    username: "",
-    password: ""
+    artist_id: 1
+    // username: "bobbirae",
+    // password: "password"
   };
 
   render() {
-    const LOGIN = gql`
-      mutation Login($artist_username: String!, $artist_password: String!) {
-        login(
-          artist_username: $artist_username
-          artist_password: $artist_password
-        ) {
-          token
-          user {
-            artist_id
-          }
-        }
-      }
-    `;
-    const { username, password } = this.state;
+    // const { username, password } = this.state
+    const { artist_id } = this.state;
     return (
-      <Mutation
-        mutation={LOGIN}
-        // variables={{ username, password }}
-        // onCompleted={data => this.handleSubmit(data)}
-      >
-        {(login, { loading, data }) => {
+      <Query query={FETCH_ARTIST} variables={{ artist_id }}>
+        {({ loading, data }) => {
+          if (loading) console.log("loading");
+          if (data) console.log("data");
+
+          const artistToRender = data;
+
+          return <div>{console.log(artistToRender)}</div>;
+        }}
+      </Query>
+    );
+  }
+
+  saveUserData = token => {
+    localStorage.setItem(AUTH_TOKEN, token);
+  };
+
+  handleChange = event => {
+    const { value } = event.target;
+    if (event.target.type === "text") {
+      this.setState({ username: value });
+    } else {
+      this.setState({ password: value });
+    }
+  };
+
+  // handleSubmit = event => {
+  //   console.log('submitting')
+  //   event.preventDefault();
+  //   const { username } = this.state;
+  //   // api request needed here?
+  //   this.setState({ username: '', password: '' })
+  // }
+}
+
+export default Login;
+
+// <Mutation
+//   mutation={LOGIN}
+//   variables={{ username, password }}
+//   onCompleted={data => console.log(data)}
+// >
+//   {mutation => <div onClick={mutation}>Run mutation</div>}
+// {
+/* {(login, { loading, data }) => {
           if (loading) console.log("loading");
           if (data) console.log("data");
           return (
@@ -98,32 +134,20 @@ class Login extends Component {
                 </div>
               </Grid>
             </Grid>
-          );
-        }}
-      </Mutation>
-    );
-  }
-
-  saveUserData = token => {
-    localStorage.setItem(AUTH_TOKEN, token);
-  };
-
-  handleChange = event => {
-    const { value } = event.target;
-    if (event.target.type === "text") {
-      this.setState({ username: value });
-    } else {
-      this.setState({ password: value });
-    }
-  };
-
-  // handleSubmit = event => {
-  //   console.log('submitting')
-  //   event.preventDefault();
-  //   const { username } = this.state;
-  //   // api request needed here?
-  //   this.setState({ username: '', password: '' })
-  // }
-}
-
-export default Login;
+          // );
+        }} */
+// }
+// </Mutation>
+// const LOGIN = gql`
+//   mutation Login($artist_username: String!, $artist_password: String!) {
+//     login(
+//       artist_username: $artist_username
+//       artist_password: $artist_password
+//     ) {
+//       token
+//       user {
+//         artist_id
+//       }
+//     }
+//   }
+// `;
