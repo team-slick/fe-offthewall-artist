@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-// import Link from "@material-ui/core/Link";
-// import Paper from "@material-ui/core/Paper";
-// import Grid from "@material-ui/core/Grid";
+import Link from "@material-ui/core/Link";
+import Paper from "@material-ui/core/Paper";
+import Grid from "@material-ui/core/Grid";
 import "../App.css";
 import "../styles/Login.css";
 // import { thisExpression } from "@babel/types";
@@ -39,31 +39,43 @@ const LOGIN = gql`
 
 class Login extends Component {
   state = {
-    // artist_id: 1
     artist_username: "bobbirae",
     artist_password: "password"
   };
 
   render() {
     const { artist_username, artist_password } = this.state;
-    // const { artist_id } = this.state;
     return (
-      <Mutation
-        mutation={LOGIN}
-        variables={{ artist_username, artist_password }}
-        onCompleted={data => console.log(data)}
-      >
-        {(login, { loading, data }) => {
-          if (loading) console.log("loading");
-          if (data) console.log("data");
+      <Grid container component="main" className="root">
+        <Grid item xs={false} sm={4} md={7} className="image" />
+        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+          <div className="paper">
+            <Mutation mutation={LOGIN} onCompleted={data => console.log(data)}>
+              {(login, { loading, error, data }) => {
+                // if (loading) return <p>Loading...</p>;
+                // if (error) return <p>Error.</p>;
+                // if (data) console.log("data");
 
-          const tokenToRender = data;
+                const tokenToRender = data;
 
-          login();
-
-          return <div>{console.log(tokenToRender)}</div>;
-        }}
-      </Mutation>
+                return (
+                  <form
+                    className="form"
+                    onSubmit={event => {
+                      event.preventDefault();
+                      login({
+                        variables: { artist_username, artist_password }
+                      });
+                    }}
+                  >
+                    <button type="submit">SIGN IN</button>
+                  </form>
+                );
+              }}
+            </Mutation>
+          </div>
+        </Grid>
+      </Grid>
     );
   }
 
