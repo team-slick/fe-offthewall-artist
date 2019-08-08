@@ -6,41 +6,64 @@ import "../App.css";
 import "../styles/Login.css";
 // import { thisExpression } from "@babel/types";
 import { gql } from "apollo-boost";
-import { Query } from "@apollo/react-components";
+import { Mutation, Query } from "@apollo/react-components";
 
 //hard-coded for now
 const AUTH_TOKEN =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJib2JiaXJhZSIsImlhdCI6MTU2NTE4NTE3OCwiZXhwIjoxNTY3Nzc3MTc4fQ.4eUZhr64Om072dYartWGpcnoai9UZonskHajuH6rfzU";
 
-const FETCH_ARTIST = gql`
-  query($artist_id: ID!) {
-    fetchArtistById(artist_id: $artist_id) {
-      artist_username
+// const LOGIN = gql`
+//   mutation($artist_username: String!, $artist_password: String!) {
+//     login(
+//       artist_username: $artist_username
+//       artist_password: $artist_password
+//     ) {
+//       token
+//     }
+//   }
+// `;
+
+const LOGIN = gql`
+  mutation Login($artist_username: String!, $artist_password: String!) {
+    login(
+      artist_username: $artist_username
+      artist_password: $artist_password
+    ) {
+      token
+      user {
+        artist_id
+      }
     }
   }
 `;
 
 class Login extends Component {
   state = {
-    artist_id: 1
-    // username: "bobbirae",
-    // password: "password"
+    // artist_id: 1
+    artist_username: "bobbirae",
+    artist_password: "password"
   };
 
   render() {
-    // const { username, password } = this.state
-    const { artist_id } = this.state;
+    const { artist_username, artist_password } = this.state;
+    // const { artist_id } = this.state;
     return (
-      <Query query={FETCH_ARTIST} variables={{ artist_id }}>
-        {({ loading, data }) => {
+      <Mutation
+        mutation={LOGIN}
+        variables={{ artist_username, artist_password }}
+        onCompleted={data => console.log(data)}
+      >
+        {(login, { loading, data }) => {
           if (loading) console.log("loading");
           if (data) console.log("data");
 
-          const artistToRender = data;
+          const tokenToRender = data;
 
-          return <div>{console.log(artistToRender)}</div>;
+          login();
+
+          return <div>{console.log(tokenToRender)}</div>;
         }}
-      </Query>
+      </Mutation>
     );
   }
 
