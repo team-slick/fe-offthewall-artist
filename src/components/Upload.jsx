@@ -5,6 +5,7 @@ import { storage } from "../firebase";
 import "../styles/Upload.css";
 import { Query } from '@apollo/react-components';
 import { gql } from 'apollo-boost';
+import logo from '../images/artlogo.png';
 
 class Upload extends Component {
   state = {
@@ -19,12 +20,14 @@ class Upload extends Component {
     const { ARTIST_ID, USERNAME } = localStorage
     return (
       <Grid container component="main" className="root">
-        <Grid item xs={false} sm={4} md={7} className="image" />
+        <Grid item xs={false} sm={4} md={7} className="image" >
+          <img src={logo} alt="Off The Wall Logo" />
+        </Grid>
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
           <div className="paper">
             <p>
               Welcome <b>{USERNAME}</b>, simply choose a wall from the list
-              below and upload you art.
+              below and upload your art.
             </p>
             <form className="form">
             <p className='select-label'>Choose a wall:</p>

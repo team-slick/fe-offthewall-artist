@@ -18,11 +18,8 @@
   height: 100vh;
 }
 
-.image {
-  background-image: url("./images/offthewall.png");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
+.image img {
+  object-fit: 'contain';
 }
 
 .paper {
