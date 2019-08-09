@@ -24,7 +24,7 @@ class Upload extends Component {
           <div className="paper">
             <p>
               Welcome <b>{USERNAME}</b>, simply choose a wall from the list
-              below and upload you art.
+              below and upload your art.
             </p>
             <form className="form">
             <p className='select-label'>Choose a wall:</p>
@@ -59,7 +59,7 @@ class Upload extends Component {
                 </div>
               </button>
             </form>
-              {this.state.isConfirmed && <p>Thank you. <br/>Your ARt has been uploaded the wall!</p>}
+              {this.state.isConfirmed && <p>Thank you. <br/>Your ARt has been uploaded to the wall!</p>}
           </div>
         </Grid>
       </Grid>

@@ -4,7 +4,7 @@
     --muted-yellow:#F4DD9B;
     --blue-dark:#173B53;
     --blue-pop:#79C9C9;
-    --pink-pop:#FFA3B0;
+    --pink-pop:rgba(255, 143, 143, 0.75);
 }
 
 .App {
@@ -19,9 +19,9 @@
 }
 
 .image {
-  background-image: url("./images/offthewall.png");
+  background-image: url("./images/artlogo.png");
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: 60vw;
   background-position: center;
 }
 
