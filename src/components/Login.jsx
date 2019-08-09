@@ -4,7 +4,6 @@ import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import "../App.css";
 import "../styles/Login.css";
-// import { thisExpression } from "@babel/types";
 import { gql } from "apollo-boost";
 import { Mutation } from "@apollo/react-components";
 import { navigate } from "@reach/router";
@@ -62,7 +61,7 @@ class Login extends Component {
                   >
                     <div className="group">
                       <input
-                        className='username'
+                        className={this.state.artist_username === '' ? 'username' : 'used'}
                         type="text"
                         onChange={this.handleChange}
                         value={this.state.username}
@@ -73,7 +72,7 @@ class Login extends Component {
                     </div>
                     <div className="group">
                       <input
-                        className='password'
+                        className={this.state.artist_password === '' ? 'password' : 'used'}
                         type="password"
                         onChange={this.handleChange}
                         value={this.state.password}
