@@ -17,6 +17,7 @@ class Upload extends Component {
   };
 
   render() {
+    const { wall_id } = this.state;
     const { ARTIST_ID, USERNAME } = localStorage
     return (
       <Grid container component="main" className="root">
@@ -39,15 +40,10 @@ class Upload extends Component {
                     street_address
                     canvas_width
                     canvas_height
+                    canvas_url
                   }
                 }`}>
-                {({loading, error, data }) => {
-                  if (loading) return <option>Loading...</option>
-                  if (error) return <option>Error :(</option>
-                  return data.fetchAllWalls.map(wall => (
-                    <option value={wall.wall_id} key={wall.wall_id}>Address: {wall.street_address}  Dimensions: {wall.canvas_width} x {wall.canvas_height}</option>
-                  ))
-                }}
+                {this.handleQuery}
                 </Query>
               </select>
               <p className='upload-label'>Upload your artwork:</p>
@@ -67,6 +63,14 @@ class Upload extends Component {
         </Grid>
       </Grid>
     );
+  }
+
+  handleQuery = ({loading, error, data }) => {
+    if (loading) return <option>Loading...</option>
+    if (error) return <option>Error :(</option>
+    return data.fetchAllWalls.map(wall => (
+      <option value={wall.wall_id} key={wall.wall_id} data_url={wall.canvas_url} >Address: {wall.street_address}  Dimensions: {wall.canvas_width} x {wall.canvas_height}</option>
+    ))
   }
 
   handleChange = event => {
