@@ -18,13 +18,13 @@ class Upload extends Component {
   };
 
   render() {
-    const { wall_id, canvas_url } = this.state;
+    const { wall_id, canvas_url, wall_address } = this.state;
     const { ARTIST_ID, USERNAME } = localStorage
     return (
       <Grid container component="main" className="root">
         <Grid item xs={false} sm={4} md={7} className="image" >
           <div className="image-container">
-            <img src={ wall_id ? canvas_url : logo } alt="Off The Wall Logo" />
+            <img src={ wall_id ? canvas_url : logo } alt={ wall_id ? wall_address : "ARt:Leeds logo" }/>
           </div>
         </Grid>
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
@@ -85,9 +85,7 @@ class Upload extends Component {
 
   handleSelectChange = event => {
     const { target } = event;
-    //console.log(target[target.value - 1].getAttribute("innerText"));
-    console.log(target[target.value - 1].innerText);
-    this.setState({wall_id: target.value, canvas_url: target[target.value - 1].getAttribute("data_url") });
+    this.setState({wall_id: target.value, canvas_url: target[target.value - 1].getAttribute("data_url"), wall_address: target[target.value - 1].innerText });
   }
 
   handleUpload = (event) => {
