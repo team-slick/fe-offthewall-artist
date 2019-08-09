@@ -4,7 +4,7 @@
     --muted-yellow:#F4DD9B;
     --blue-dark:#173B53;
     --blue-pop:#79C9C9;
-    --pink-pop:#FFA3B0;
+    --pink-pop:rgba(255, 143, 143, 0.75);
 }
 
 .App {
