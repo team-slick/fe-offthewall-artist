@@ -5,6 +5,7 @@ import { storage } from "../firebase";
 import "../styles/Upload.css";
 import { Query } from '@apollo/react-components';
 import { gql } from 'apollo-boost';
+import logo from '../images/artlogo.png';
 
 class Upload extends Component {
   state = {
@@ -12,14 +13,20 @@ class Upload extends Component {
     urlString: "",
     wall_id: null,
     wall_address: '',
-    isConfirmed: false
+    isConfirmed: false,
+    canvas_url: ''
   };
 
   render() {
+    const { wall_id, canvas_url, wall_address } = this.state;
     const { ARTIST_ID, USERNAME } = localStorage
     return (
       <Grid container component="main" className="root">
-        <Grid item xs={false} sm={4} md={7} className="image" />
+        <Grid item xs={false} sm={4} md={7} className="image" >
+          <div className="image-container">
+            <img src={ wall_id ? canvas_url : logo } alt={ wall_id ? wall_address : "ARt:Leeds logo" }/>
+          </div>
+        </Grid>
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
           <div className="paper">
             <p>
@@ -36,15 +43,10 @@ class Upload extends Component {
                     street_address
                     canvas_width
                     canvas_height
+                    canvas_url
                   }
                 }`}>
-                {({loading, error, data }) => {
-                  if (loading) return <option>Loading...</option>
-                  if (error) return <option>Error :(</option>
-                  return data.fetchAllWalls.map(wall => (
-                    <option value={wall.wall_id} key={wall.wall_id}>Address: {wall.street_address}  Dimensions: {wall.canvas_width} x {wall.canvas_height}</option>
-                  ))
-                }}
+                {this.handleQuery}
                 </Query>
               </select>
               <p className='upload-label'>Upload your artwork:</p>
@@ -66,6 +68,14 @@ class Upload extends Component {
     );
   }
 
+  handleQuery = ({loading, error, data }) => {
+    if (loading) return <option>Loading...</option>
+    if (error) return <option>Error :(</option>
+    return data.fetchAllWalls.map(wall => (
+      <option value={wall.wall_id} key={wall.wall_id} data_url={wall.canvas_url} >Address: {wall.street_address}  Dimensions: {wall.canvas_width} x {wall.canvas_height}m</option>
+    ))
+  }
+
   handleChange = event => {
     if (event.target.files[0]) {
       const image = event.target.files[0];
@@ -74,8 +84,8 @@ class Upload extends Component {
   };
 
   handleSelectChange = event => {
-    const { value } = event.target
-    this.setState({wall_id: value})
+    const { target } = event;
+    this.setState({wall_id: target.value, canvas_url: target[target.value - 1].getAttribute("data_url"), wall_address: target[target.value - 1].innerText });
   }
 
   handleUpload = (event) => {
