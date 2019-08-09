@@ -13,16 +13,19 @@ class Upload extends Component {
     urlString: "",
     wall_id: null,
     wall_address: '',
-    isConfirmed: false
+    isConfirmed: false,
+    canvas_url: ''
   };
 
   render() {
-    const { wall_id } = this.state;
+    const { wall_id, canvas_url } = this.state;
     const { ARTIST_ID, USERNAME } = localStorage
     return (
       <Grid container component="main" className="root">
         <Grid item xs={false} sm={4} md={7} className="image" >
-          <img src={logo} alt="Off The Wall Logo" />
+          <div className="image-container">
+            <img src={ wall_id ? canvas_url : logo } alt="Off The Wall Logo" />
+          </div>
         </Grid>
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
           <div className="paper">
@@ -81,8 +84,8 @@ class Upload extends Component {
   };
 
   handleSelectChange = event => {
-    const { value } = event.target
-    this.setState({wall_id: value})
+    const { target } = event;
+    this.setState({wall_id: target.value, canvas_url: target[target.value - 1].getAttribute("data_url") });
   }
 
   handleUpload = (event) => {
