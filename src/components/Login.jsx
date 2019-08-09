@@ -7,6 +7,7 @@ import "../styles/Login.css";
 import { gql } from "apollo-boost";
 import { Mutation } from "@apollo/react-components";
 import { navigate } from "@reach/router";
+import logo from '../images/artlogo.png';
 
 const LOGIN = gql`
   mutation Login($artist_username: String!, $artist_password: String!) {
@@ -33,7 +34,9 @@ class Login extends Component {
     const { artist_username, artist_password } = this.state;
     return (
       <Grid container component="main" className="root">
-        <Grid item xs={false} sm={4} md={7} className="image" />
+        <Grid item xs={false} sm={4} md={7} className="image" >
+          <img src={logo} alt={"ARt:Leeds logo"}/>
+        </Grid>
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
           <div className="paper">
             <Mutation
