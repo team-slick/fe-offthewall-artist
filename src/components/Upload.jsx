@@ -61,6 +61,7 @@ class Upload extends Component {
                   <span className="circle" />
                 </div>
               </button>
+              <div className="error"></div>
             </form>
               {this.state.isConfirmed && <p>Thank you. <br/>Your ARt has been uploaded to the wall!</p>}
           </div>
