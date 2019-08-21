@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import Link from "@material-ui/core/Link";
+import { Link as UILink } from "@material-ui/core/Link";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import "../App.css";
 import "../styles/Login.css";
 import { gql } from "apollo-boost";
 import { Mutation } from "@apollo/react-components";
-import { navigate } from "@reach/router";
+import { navigate, Link } from "@reach/router";
 import logo from '../images/artlogo.png';
 
 const LOGIN = gql`
@@ -35,7 +35,7 @@ class Login extends Component {
     return (
       <Grid container component="main" className="root">
         <Grid item xs={false} sm={4} md={7} className="image" >
-          <img src={logo} alt={"ARt:Leeds logo"}/>
+          <img src={logo} alt={"ARt:Leeds logo"} />
         </Grid>
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
           <div className="paper">
@@ -91,8 +91,8 @@ class Login extends Component {
                       </div>
                     </button>
                     <div className="links">
-                      <Link to="#">Forgot password?</Link>
-                      <Link to="#">Don't have an account? Sign up.</Link>
+                      <Link to="/register">Forgot password?</Link>
+                      <Link to="/register">Don't have an account? Sign up.</Link>
                     </div>
                   </form>
                 );

@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { Router, navigate } from '@reach/router';
+import { Router } from '@reach/router';
 import Login from './components/Login';
 import RegForm from './components/RegForm';
 import Upload from './components/Upload';
 import './App.css';
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from '@apollo/react-hooks';
+import { navigate } from '@reach/router/lib/history';
 
 
 
@@ -22,6 +23,7 @@ class App extends Component {
         <ApolloProvider client={client} >
           <Router>
             <Login path='/login' />
+            <Login path='/' />
             <RegForm path='/register' />
             <Upload path='/upload' />
           </Router>
@@ -29,9 +31,10 @@ class App extends Component {
       </div>
     );
   }
-  componentDidMount = () => {
-    navigate("/login");
-  }
+  // componentDidMount = () => {
+  //   navigate("./")
+  // }
+  //! on refresh navigates all pages to login.
 }
 
 export default App;
