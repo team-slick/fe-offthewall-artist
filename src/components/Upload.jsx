@@ -97,12 +97,12 @@ class Upload extends Component {
                                   variables: {
                                     image_url: urlString,
                                     blurb: "no blurb",
-                                    wall_id: Number(wall_id),
-                                    artist_id: ARTIST_ID
+                                    wall_id: Number(wall_id)
                                   }
                                 })
                                   .then(res => console.log(res))
                                   .catch(err => console.log(err));
+                                // needs a function to delete FB url if db post fails
                               });
                           }
                         );
