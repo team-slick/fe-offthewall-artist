@@ -15,6 +15,7 @@ class Upload extends Component {
     wall_address: '',
     isConfirmed: false,
     canvas_url: '',
+    uploading: false,
     error: null
   };
 
@@ -102,6 +103,7 @@ class Upload extends Component {
       error => {
         // error function
         if (error.code_ === 'storage/unauthorized') {
+          this.setState({ error: "Invalid upload: Please ensure that the image is in PNG format, is no more than 10MB in size and has a filename no longer than 92 characters." });
         }
       },
       () => {
