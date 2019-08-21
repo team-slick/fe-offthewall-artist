@@ -14,7 +14,8 @@ class Upload extends Component {
     wall_id: null,
     wall_address: '',
     isConfirmed: false,
-    canvas_url: ''
+    canvas_url: '',
+    error: null
   };
 
   render() {
@@ -99,7 +100,8 @@ class Upload extends Component {
       },
       error => {
         // error function
-        console.log(error);
+        if (error.code_ === 'storage/unauthorized') {
+        }
       },
       () => {
         // complete function
