@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Router } from '@reach/router';
-// import Header from './components/Header';
+import { Router, navigate } from '@reach/router';
 import Login from './components/Login';
 import RegForm from './components/RegForm';
 import Upload from './components/Upload';
@@ -20,7 +19,6 @@ class App extends Component {
   render() {
     return (
       <div className="App" >
-        {/* <Header /> */}
         <ApolloProvider client={client} >
           <Router>
             <Login path='/login' />
@@ -30,6 +28,9 @@ class App extends Component {
         </ApolloProvider>
       </div>
     );
+  }
+  componentDidMount = () => {
+    navigate("/login");
   }
 }
 
