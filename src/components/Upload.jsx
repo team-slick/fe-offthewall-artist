@@ -20,7 +20,7 @@ class Upload extends Component {
   };
 
   render() {
-    const { wall_id, canvas_url, wall_address } = this.state;
+    const { wall_id, canvas_url, wall_address, uploading, error } = this.state;
     const { ARTIST_ID, USERNAME } = localStorage
     return (
       <Grid container component="main" className="root">
@@ -62,9 +62,10 @@ class Upload extends Component {
                   <span className="circle" />
                 </div>
               </button>
-              <div className="error"></div>
             </form>
               {this.state.isConfirmed && <p>Thank you. <br/>Your ARt has been uploaded to the wall!</p>}
+              {uploading && <p className="uploading">Uploading image...</p>}
+              {(error !== null && !uploading) && <p className="error">{error}</p>}
           </div>
         </Grid>
       </Grid>
@@ -94,16 +95,18 @@ class Upload extends Component {
   handleUpload = (event) => {
     event.preventDefault()
     const { image } = this.state;
+    console.dir(image);
     const uploadTask = storage.ref(`${image.name}`).put(image);
     uploadTask.on(
       "state_changed",
       snapshot => {
         // progress function
+        this.setState({ uploading: true });
       },
       error => {
         // error function
         if (error.code_ === 'storage/unauthorized') {
-          this.setState({ error: "Invalid upload: Please ensure that the image is in PNG format, is no more than 10MB in size and has a filename no longer than 92 characters." });
+          this.setState({ uploading: false, error: "Invalid upload: Please ensure that the image is in PNG format, is no more than 10MB in size and has a filename no longer than 92 characters." });
         }
       },
       () => {
@@ -113,7 +116,7 @@ class Upload extends Component {
           .child(image.name)
           .getDownloadURL()
           .then(url => {
-            this.setState({urlString: url, isConfirmed: true})
+            this.setState({urlString: url, isConfirmed: true, uploading: false, error: null})
           })
       }
     );
