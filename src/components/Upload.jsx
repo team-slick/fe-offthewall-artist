@@ -95,7 +95,6 @@ class Upload extends Component {
   handleUpload = (event) => {
     event.preventDefault()
     const { image } = this.state;
-    console.dir(image);
     const uploadTask = storage.ref(`${image.name}`).put(image);
     uploadTask.on(
       "state_changed",
