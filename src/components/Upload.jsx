@@ -23,7 +23,7 @@ class Upload extends Component {
     wall_address: "",
     isConfirmed: false,
     canvas_url: "",
-    uploading: false,
+    uploading: null,
     error: null
   };
 
@@ -105,7 +105,7 @@ class Upload extends Component {
                       </p>
                     )}
                     {uploading && (
-                      <p className="uploading">Uploading image...</p>
+                      <p className="uploading">Uploading image: {uploading}</p>
                     )}
                     {this.state.error !== null && !uploading && (
                       <p className="error">{this.state.error}</p>
@@ -159,9 +159,9 @@ class Upload extends Component {
       .put(image);
     uploadTask.on(
       "state_changed",
-      snapshot => {
+      ({ bytesTransferred, totalBytes }) => {
         // progress function
-        this.setState({ uploading: true });
+        this.setState({ uploading: `${Math.ceil(bytesTransferred / totalBytes * 100)}%` });
       },
       error => {
         // error function
