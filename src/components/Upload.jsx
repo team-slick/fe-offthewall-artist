@@ -145,7 +145,7 @@ class Upload extends Component {
   handleSelectChange = event => {
     const { target } = event;
     this.setState({
-      wall_id: target.value,
+      wall_id: parseInt(target.value),
       canvas_url: target[target.value - 1].getAttribute("data_url"),
       wall_address: target[target.value - 1].innerText
     });
@@ -184,7 +184,7 @@ class Upload extends Component {
               variables: {
                 image_url: url,
                 blurb: "no blurb",
-                wall_id: Number(wall_id)
+                wall_id
               }
             })
             .then(res => console.log(res))
