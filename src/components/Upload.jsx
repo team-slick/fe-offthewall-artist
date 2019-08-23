@@ -123,16 +123,23 @@ class Upload extends Component {
   handleQuery = ({ loading, error, data }) => {
     if (loading) return <option>Loading...</option>;
     if (error) return <option>Error :(</option>;
-    return data.fetchAllWalls.map(wall => (
+    return (<>
       <option
-        value={wall.wall_id}
-        key={wall.wall_id}
-        data_url={wall.canvas_url}
-      >
-        Address: {wall.street_address} Dimensions: {wall.canvas_width} x{" "}
-        {wall.canvas_height}m
-      </option>
-    ));
+        value={0}
+        key={0}
+        data_url=""
+      >Please select a wall...</option>
+      {data.fetchAllWalls.map(wall => (
+          <option
+            value={wall.wall_id}
+            key={wall.wall_id}
+            data_url={wall.canvas_url}
+          >
+            Address: {wall.street_address} Dimensions: {wall.canvas_width} x{" "}
+            {wall.canvas_height}m
+          </option>
+        ))}
+      </>);
   };
 
   handleChange = event => {
@@ -144,10 +151,11 @@ class Upload extends Component {
 
   handleSelectChange = event => {
     const { target } = event;
+    const value = parseInt(target.value);
     this.setState({
-      wall_id: parseInt(target.value),
-      canvas_url: target[target.value - 1].getAttribute("data_url"),
-      wall_address: target[target.value - 1].innerText
+      wall_id: value && value,
+      canvas_url: value && target[value].getAttribute("data_url"),
+      wall_address: value ? target[value].innerText : ""
     });
   };
 
