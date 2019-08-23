@@ -36,7 +36,7 @@ class Upload extends Component {
       wall_address,
       uploading
     } = this.state;
-    const { ARTIST_ID, USERNAME } = localStorage;
+    const { ARTIST_ID, USERNAME, AUTH_TOKEN } = localStorage;
     return (
       <Grid container component="main" className="root">
         <Grid item xs={false} sm={4} md={7} className="image">
@@ -49,7 +49,7 @@ class Upload extends Component {
         </Grid>
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
           <div className="paper">
-            <Mutation mutation={ADD_IMAGE}>
+            <Mutation mutation={ADD_IMAGE} context={{ headers: {authorization: AUTH_TOKEN }}}>
               {(addImage, { loading, error, data }) => {
                 return (
                   <div>
@@ -180,23 +180,23 @@ class Upload extends Component {
           .child(image.name)
           .getDownloadURL()
           .then(url => {
-            this.setState({
-              urlString: url,
-              isConfirmed: true,
-              uploading: false,
-              error: null
-            });
             addImage({
               variables: {
-                image_url: urlString,
+                image_url: url,
                 blurb: "no blurb",
                 wall_id: Number(wall_id)
               }
             })
-              .then(res => console.log(res))
-              .catch(err => console.log(err));
+            .then(res => console.log(res))
+            .catch(err => console.log(err));
             // needs a function to delete FB url if db post fails
+            this.setState({
+              urlString: url,
+              isConfirmed: true,
+              uploading: null,
+              error: null
           });
+        });
       }
     );
   }
