@@ -33,7 +33,9 @@ class App extends Component {
     );
   }
   componentDidMount = () => {
-    navigate("/login");
+    if (!localStorage.getItem("AUTH_TOKEN")) {
+      navigate("/login");
+    }
   }
 }
 
