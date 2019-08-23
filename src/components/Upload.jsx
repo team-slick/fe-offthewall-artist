@@ -61,51 +61,7 @@ class Upload extends Component {
                       className="form"
                       onSubmit={event => {
                         event.preventDefault();
-                        const uploadTask = storage
-                          .ref(`${image.name}`)
-                          .put(image);
-                        uploadTask.on(
-                          "state_changed",
-                          snapshot => {
-                            // progress function
-                            this.setState({ uploading: true });
-                          },
-                          error => {
-                            // error function
-                            if (error.code_ === "storage/unauthorized") {
-                              this.setState({
-                                uploading: false,
-                                error:
-                                  "Invalid upload: Please ensure that the image is in PNG format, is no more than 10MB in size and has a filename no longer than 92 characters."
-                              });
-                            }
-                          },
-                          () => {
-                            // complete function
-                            storage
-                              .ref()
-                              .child(image.name)
-                              .getDownloadURL()
-                              .then(url => {
-                                this.setState({
-                                  urlString: url,
-                                  isConfirmed: true,
-                                  uploading: false,
-                                  error: null
-                                });
-                                addImage({
-                                  variables: {
-                                    image_url: urlString,
-                                    blurb: "no blurb",
-                                    wall_id: Number(wall_id)
-                                  }
-                                })
-                                  .then(res => console.log(res))
-                                  .catch(err => console.log(err));
-                                // needs a function to delete FB url if db post fails
-                              });
-                          }
-                        );
+                        this.handleSubmit(addImage);
                       }}
                     >
                       <p className="select-label">Choose a wall:</p>
@@ -196,6 +152,54 @@ class Upload extends Component {
   };
 
   // handleUpload = event => {};
+  handleSubmit = addImage => {
+    const { image, urlString, wall_id } = this.state;
+    const uploadTask = storage
+      .ref(`${image.name}`)
+      .put(image);
+    uploadTask.on(
+      "state_changed",
+      snapshot => {
+        // progress function
+        this.setState({ uploading: true });
+      },
+      error => {
+        // error function
+        if (error.code_ === "storage/unauthorized") {
+          this.setState({
+            uploading: false,
+            error:
+              "Invalid upload: Please ensure that the image is in PNG format, is no more than 10MB in size and has a filename no longer than 92 characters."
+          });
+        }
+      },
+      () => {
+        // complete function
+        storage
+          .ref()
+          .child(image.name)
+          .getDownloadURL()
+          .then(url => {
+            this.setState({
+              urlString: url,
+              isConfirmed: true,
+              uploading: false,
+              error: null
+            });
+            addImage({
+              variables: {
+                image_url: urlString,
+                blurb: "no blurb",
+                wall_id: Number(wall_id)
+              }
+            })
+              .then(res => console.log(res))
+              .catch(err => console.log(err));
+            // needs a function to delete FB url if db post fails
+          });
+      }
+    );
+  }
 }
 
 export default Upload;
