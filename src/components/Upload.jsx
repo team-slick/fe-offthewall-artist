@@ -29,14 +29,12 @@ class Upload extends Component {
 
   render() {
     const {
-      image,
-      urlString,
       wall_id,
       canvas_url,
       wall_address,
       uploading
     } = this.state;
-    const { ARTIST_ID, USERNAME, AUTH_TOKEN } = localStorage;
+    const { USERNAME, AUTH_TOKEN } = localStorage;
     return (
       <Grid container component="main" className="root">
         <Grid item xs={false} sm={4} md={7} className="image">
@@ -159,11 +157,12 @@ class Upload extends Component {
     });
   };
 
-  // handleUpload = event => {};
   handleSubmit = addImage => {
-    const { image, urlString, wall_id } = this.state;
+    const { image, wall_id } = this.state;
+    const { USERNAME } = localStorage;
+    const filename = `${wall_id}_${USERNAME}_${image.name}`;
     const uploadTask = storage
-      .ref(`${image.name}`)
+      .ref(filename)
       .put(image);
     uploadTask.on(
       "state_changed",
@@ -185,7 +184,7 @@ class Upload extends Component {
         // complete function
         storage
           .ref()
-          .child(image.name)
+          .child(filename)
           .getDownloadURL()
           .then(url => {
             addImage({
