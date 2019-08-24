@@ -194,15 +194,20 @@ class Upload extends Component {
                 wall_id
               }
             })
-            .then(res => console.log(res))
-            .catch(err => console.log(err));
-            // needs a function to delete FB url if db post fails
-            this.setState({
-              urlString: url,
-              isConfirmed: true,
-              uploading: null,
-              error: null
-          });
+            .then(res => this.setState({
+                urlString: url,
+                isConfirmed: true,
+                uploading: null,
+                error: null
+            }))
+            .catch(err => {
+              // needs to delete FB url if db post fails
+              const error = (err.errors && err.errors.length) ? err.errors[0].message : 'Server Error: Upload failed. Please try again.';
+              this.setState({
+                uploading: null,
+                error
+              });
+            });
         });
       }
     );
