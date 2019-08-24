@@ -35,6 +35,8 @@ class App extends Component {
   componentDidMount = () => {
     if (!localStorage.getItem("AUTH_TOKEN")) {
       navigate("/login");
+    } else {
+      navigate("/upload");
     }
   }
 }
