@@ -52,8 +52,16 @@ class Upload extends Component {
                 return (
                   <div>
                     <p>
-                      Welcome <b>{USERNAME}</b>, simply choose a wall from the
-                      list below and upload your art.
+                      Welcome, <b>{USERNAME}</b>!
+                    </p>
+                    <p>
+                      Please select a wall from the list below. Then, you can download the image displayed on the left and use your preferred image editing software to position your art on the wall.
+                    </p>
+                    <p>
+                      Finally, remove the wall image layer and save the image as a PNG with transparency.
+                    </p>
+                    <p>
+                      Please ensure that the file is no more than 10MB and the filename is no longer than 92 characters before uploading it.
                     </p>
                     <form
                       className="form"
