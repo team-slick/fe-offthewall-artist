@@ -9,13 +9,9 @@ import { ApolloProvider } from '@apollo/react-hooks';
 
 
 
-//const client = new ApolloClient({
-  //uri: 'https://offthewall-teamslick.herokuapp.com'
-//})
 const client = new ApolloClient({
-  uri: 'https://damp-earth-59669.herokuapp.com'
+  uri: 'https://offthewall-teamslick.herokuapp.com'
 })
-
 
 class App extends Component {
   state = {}
