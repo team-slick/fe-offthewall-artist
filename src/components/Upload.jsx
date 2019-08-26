@@ -167,6 +167,7 @@ class Upload extends Component {
 
   handleSubmit = addImage => {
     const { image, wall_id } = this.state;
+    if (!image || !wall_id) return this.setState({ error: "Please select an image and a wall." });
     const { USERNAME } = localStorage;
     const filename = `${wall_id}_${USERNAME}_${image.name}`;
     const uploadTask = storage
@@ -176,7 +177,7 @@ class Upload extends Component {
       "state_changed",
       ({ bytesTransferred, totalBytes }) => {
         // progress function
-        this.setState({ uploading: `${Math.ceil(bytesTransferred / totalBytes * 100)}%` });
+        this.setState({ uploading: `${Math.ceil(bytesTransferred / totalBytes * 100)}%`, isConfirmed: false });
       },
       error => {
         // error function
