@@ -13,7 +13,6 @@ const client = new ApolloClient({
   uri: 'https://offthewall-teamslick.herokuapp.com'
 })
 
-
 class App extends Component {
   state = {}
   render() {
@@ -30,7 +29,11 @@ class App extends Component {
     );
   }
   componentDidMount = () => {
-    navigate("/login");
+    if (!localStorage.getItem("AUTH_TOKEN")) {
+      navigate("/login");
+    } else {
+      navigate("/upload");
+    }
   }
 }
 
