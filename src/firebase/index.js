@@ -1,6 +1,6 @@
 import firebase from "firebase/app";
 import "firebase/storage";
-import API_KEY from '../config'
+const API_KEY = process.env.API_KEY || require('../config');
 
 const config = {
  apiKey: API_KEY,
