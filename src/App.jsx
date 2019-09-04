@@ -4,7 +4,7 @@ import Login from './components/Login';
 import RegForm from './components/RegForm';
 import Upload from './components/Upload';
 import './App.css';
-import ApolloClient from "apollo-boost";
+import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from '@apollo/react-hooks';
 
 
@@ -17,7 +17,7 @@ class App extends Component {
   state = {}
   render() {
     return (
-      <div className="App" >
+      <div className='App' >
         <ApolloProvider client={client} >
           <Router>
             <Login path='/login' />
@@ -30,9 +30,9 @@ class App extends Component {
   }
   componentDidMount = () => {
     if (!localStorage.getItem("AUTH_TOKEN")) {
-      navigate("/login");
+      navigate('/login');
     } else {
-      navigate("/upload");
+      navigate('/upload');
     }
   }
 }
