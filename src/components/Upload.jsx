@@ -156,12 +156,14 @@ class Upload extends Component {
   };
 
   handleSelectChange = event => {
+    event.persist()
     const { target } = event;
     const value = parseInt(target.value);
+    const selectedElem = Object.values(target).find(elem => elem.nodeName === 'OPTION' && parseInt(elem.value) === value);
     this.setState({
       wall_id: value && value,
-      canvas_url: value && target[value].getAttribute("data_url"),
-      wall_address: value ? target[value].innerText : ""
+      canvas_url: value && selectedElem.getAttribute("data_url"),
+      wall_address: value ? selectedElem.innerText : ""
     });
   };
 
