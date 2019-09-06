@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import { Router } from '@reach/router';
-// import Header from './components/Header';
+import { Router, navigate } from '@reach/router';
 import Login from './components/Login';
 import RegForm from './components/RegForm';
 import Upload from './components/Upload';
 import './App.css';
-import ApolloClient from "apollo-boost";
+import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from '@apollo/react-hooks';
 
 
@@ -14,13 +13,11 @@ const client = new ApolloClient({
   uri: 'https://offthewall-teamslick.herokuapp.com'
 })
 
-
 class App extends Component {
   state = {}
   render() {
     return (
-      <div className="App" >
-        {/* <Header /> */}
+      <div className='App' >
         <ApolloProvider client={client} >
           <Router>
             <Login path='/login' />
@@ -30,6 +27,13 @@ class App extends Component {
         </ApolloProvider>
       </div>
     );
+  }
+  componentDidMount = () => {
+    if (!localStorage.getItem("AUTH_TOKEN")) {
+      navigate('/login');
+    } else {
+      navigate('/upload');
+    }
   }
 }
 
