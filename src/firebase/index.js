@@ -1,6 +1,6 @@
 import firebase from "firebase/app";
 import "firebase/storage";
-const API_KEY = process.env.API_KEY || require('../config');
+const API_KEY = process.env.REACT_APP_FIREBASE_API_KEY;
 
 const config = {
  apiKey: API_KEY,
