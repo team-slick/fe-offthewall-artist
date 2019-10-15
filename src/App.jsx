@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Router } from '@reach/router';
-// import Header from './components/Header';
-import Login from './components/Login';
-import RegForm from './components/RegForm';
+// import Login from './components/Login';
+// import RegForm from './components/RegForm';
 import Upload from './components/Upload';
 import './App.css';
 import ApolloClient from "apollo-boost";
@@ -20,11 +19,10 @@ class App extends Component {
   render() {
     return (
       <div className="App" >
-        {/* <Header /> */}
         <ApolloProvider client={client} >
           <Router>
-            <Login path='/login' />
-            <RegForm path='/register' />
+            {/* <Login path='/login' />
+            <RegForm path='/register' /> */}
             <Upload path='/upload' />
           </Router>
         </ApolloProvider>
