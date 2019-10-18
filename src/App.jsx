@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Router } from '@reach/router';
 // import Login from './components/Login';
 // import RegForm from './components/RegForm';
-import Upload from './components/Upload';
+import Upload_grid from './components/Upload_grid';
 import './App.css';
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from '@apollo/react-hooks';
@@ -23,7 +23,7 @@ class App extends Component {
           <Router>
             {/* <Login path='/login' />
             <RegForm path='/register' /> */}
-            <Upload path='/upload' />
+            <Upload_grid path='/upload' />
           </Router>
         </ApolloProvider>
       </div>

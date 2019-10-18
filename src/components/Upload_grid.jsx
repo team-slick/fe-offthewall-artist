@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { Query } from '@apollo/react-components';
 import { gql } from 'apollo-boost';
 import { storage } from '../firebase';
-import '../styles/styles.scss'
-import logo from '../images/artlogo.png'
+import '../styles/styles.scss';
+import '../styles/main.scss';
+import logo from '../images/artlogo.png';
 
 class Upload extends Component {
     state = {
@@ -18,40 +19,46 @@ class Upload extends Component {
     render() {
         const { wall_id, canvas_url, wall_address } = this.state;
         return (
-            <div>
-                <div>
-                    <img src={wall_id ? canvas_url : logo} alt={wall_id ? wall_address : "ARt:Leeds logo"} />
+            <main>
+                <img src={logo} alt={"ARt:Leeds logo"} />
+                <div className="container">
+                    <Query query={gql`
+                {
+                fetchAllWalls {
+                    wall_id
+                    street_address
+                    canvas_width
+                    canvas_height
+                    canvas_url
+                    }
+                }`}>{this.handleQuery}
+                    </Query>
                 </div>
-                <h1>Upload page</h1>
-                <form>
-                    <select onChange={this.handleSelectChange}>
-                        <Query query={gql`
-                        {
-                        fetchAllWalls {
-                            wall_id
-                            street_address
-                            canvas_width
-                            canvas_height
-                            canvas_url
-                            }
-                        }`}>{this.handleQuery}
-                        </Query>
-                    </select>
-                    <input type="file" onChange={this.handleChange} />
-                    <button onClick={this.handleUpload}>Submit</button>
-                </form>
-                {this.state.isConfirmed && <p>Thank you,<br />Your ARt has been uploaded to the wall!</p>}
-            </div>
+
+
+
+
+
+                <input type="file" onChange={this.handleChange} />
+                <button onClick={this.handleUpload}>Submit</button>
+            </main>
+            // {this.state.isConfirmed && <p>Thank you,<br />Your ARt has been uploaded to the wall!</p>}
         );
     }
 
+
     handleQuery = ({ loading, error, data }) => {
-        if (loading) return <option>Loading...</option>
-        if (error) return <option>Error :(</option>
+        if (loading) return <h2>Loading wall images..</h2>
+        if (error) return <h1>Error :(</h1>
         return data.fetchAllWalls.map(
             wall => (
-                <option value={wall.wall_id} key={wall.wall_id} data_url={wall.canvas_url} >Address: {wall.street_address} - Dimensions: {wall.canvas_width} x {wall.canvas_height}m
-                </option>
+                <div className="wall-card" key={wall.wall_id}>
+                    <div className="wall-info">
+                        <strong>{wall.street_address}</strong>
+                        <p>{wall.canvas_width} x {wall.canvas_height}m</p>
+                    </div>
+                    <img onClick={this.handleSelectChange} value={wall.wall_id} data_url={wall.canvas_url} src={wall.canvas_url} alt={`${wall.street_address}`} className="wall-card__image"></img>
+                </div>
             )
         );
     }
@@ -66,9 +73,9 @@ class Upload extends Component {
     handleSelectChange = event => {
         const { target } = event
         this.setState({
-            wall_id: target.value,
-            canvas_url: target[target.value - 1].getAttribute("data_url"),
-            wall_address: target[target.value - 1].innerText
+            wall_id: target.getAttribute('value'),
+            canvas_url: target.getAttribute('data_url'),
+            wall_address: target.getAttribute('alt')
         })
     }
 
