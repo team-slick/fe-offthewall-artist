@@ -96,8 +96,8 @@ const Upload = () => {
           </p>
           <form className="form">
             <p className="select-label">Choose a wall:</p>
-            <select className="drop-down" onChange={handleSelectChange}>
-              <option>--- select a wall ---</option>
+            <select className="drop-down" defaultValue={"DEFAULT"} onChange={handleSelectChange}>
+              <option disabled value="DEFAULT">--- select a wall ---</option>
               <Query
                 query={gql`
                   {
