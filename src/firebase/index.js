@@ -1,9 +1,9 @@
 import firebase from "firebase/app";
 import "firebase/storage";
-import API_KEY from '../config'
+import {FIREBASE_API_KEY} from '../config';
 
 const config = {
- apiKey: API_KEY,
+ apiKey: FIREBASE_API_KEY,
  authDomain: "slickproject-fbaad.firebaseapp.com",
  databaseURL: "https://slickproject-fbaad.firebaseio.com",
  projectId: "slickproject-fbaad",
